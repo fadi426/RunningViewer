@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    authenticated: false,
+    authenticated: false
   },
   mutations: {
-    authentication : (state, payload) => {
+    authentication: (state, payload) => {
       state.authenticated = payload;
-    },
+    }
   },
   actions: {}
 });
