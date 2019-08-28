@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button v-on:click="sheetContent()">Hiero</button>
     <div class="limiter">
       <div class="container-table100">
         <div class="wrap-table100">
@@ -9,22 +8,30 @@
               <thead>
                 <tr class="table100-head">
                   <th class="column1">Date</th>
-                  <th class="column2">Order ID</th>
-                  <th class="column3">Name</th>
-                  <th class="column4">Price</th>
-                  <th class="column5">Quantity</th>
-                  <th class="column6">Total</th>
+                  <th class="column2">Start</th>
+                  <th class="column3">End</th>
+                  <th class="column4">Distance (km)</th>
+                  <th class="column5">Time (hours)</th>
+                  <th class="column6">Average speed (km/h)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-for="value in this.$store.state.runningData" v-bind:key="value.Date">
+                  <td class="column1">{{value.Date}}</td>
+                  <td class="column2">{{value.Start}}</td>
+                  <td class="column3">{{value.End}}</td>
+                  <td class="column4">{{value.Distance}}</td>
+                  <td class="column5">{{value.Time}}</td>
+                  <td class="column6">{{value.AverageSpeed}}</td>
+                </tr>
+                <!-- <tr>
                   <td class="column1">2017-09-29 01:22</td>
                   <td class="column2">200398</td>
                   <td class="column3">iPhone X 64Gb Grey</td>
                   <td class="column4">$999.00</td>
                   <td class="column5">1</td>
                   <td class="column6">$999.00</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -35,15 +42,22 @@
 </template>
 
 <script>
-import SpreadsheetUtil from "@/googleSheets/SpreadsheetUtil.js";
+import SpreadsheetUtil from "@/modules/SpreadsheetUtil.js";
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     sheetContent() {
-      SpreadsheetUtil.getGoogleSheetData();
+      SpreadsheetUtil.getGoogleSheetData().then((result) => {
+        this.$store.commit("addRunningData", result.data);
+      })
     }
+  },
+  created() {
+    if(this.$store.state.runningData.length == 0)
+      this.sheetContent();
   }
 };
 </script>
@@ -149,13 +163,7 @@ iframe {
 }
 
 .container-table100 {
-  width: 100%;
   min-height: 100vh;
-  background: url("../assets/hardlopen-2.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +196,7 @@ table th {
 
 table thead tr {
   height: 60px;
-  background: #36304a;
+  background: #673ab7;
 }
 
 table tbody tr {
@@ -292,7 +300,7 @@ tbody tr:hover {
     padding: 37px 0;
   }
   table tbody tr td {
-    padding-left: 40% !important;
+    padding-left: 60% !important;
     margin-bottom: 24px;
   }
   table tbody tr td:last-child {
@@ -313,19 +321,19 @@ tbody tr:hover {
     content: "Date";
   }
   table tbody tr td:nth-child(2):before {
-    content: "Order ID";
+    content: "Start";
   }
   table tbody tr td:nth-child(3):before {
-    content: "Name";
+    content: "End";
   }
   table tbody tr td:nth-child(4):before {
-    content: "Price";
+    content: "Distance (km)";
   }
   table tbody tr td:nth-child(5):before {
-    content: "Quantity";
+    content: "Time (hours)";
   }
   table tbody tr td:nth-child(6):before {
-    content: "Total";
+    content: "Average speed (km/h)";
   }
   .column4,
   .column5,

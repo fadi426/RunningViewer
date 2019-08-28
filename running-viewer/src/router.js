@@ -2,9 +2,26 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import LoginComponent from "./views/login.vue";
-import SecureComponent from "./views/secure.vue";
+import ControlPanel from "./views/ControlPanel.vue";
+import store from './store'
 
 Vue.use(Router);
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/login')
+}
 
 export default new Router({
   mode: "history",
@@ -27,12 +44,14 @@ export default new Router({
     {
       path: "/login",
       name: "login",
-      component: LoginComponent
+      component: LoginComponent,
+      beforeEnter: ifNotAuthenticated,
     },
     {
-      path: "/secure",
-      name: "secure",
-      component: SecureComponent
+      path: "/controlpanel",
+      name: "controlpanel",
+      component: ControlPanel,
+      beforeEnter: ifAuthenticated,
     }
   ]
 });
