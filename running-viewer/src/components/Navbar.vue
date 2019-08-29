@@ -2,15 +2,18 @@
   <div id="nav">
     <router-link to="/">Home</router-link>
     <router-link to="/about"> | About</router-link>
-    <router-link v-if="!this.$store.getters.isAuthenticated" to="/login">
+    <router-link v-if="!isAuthenticated && !authLoading" to="/login">
       | Login</router-link
     >
-    <a a v-if="this.$store.getters.isAuthenticated" @click="logout()"> | Logout</a>
+    <a a v-if="isAuthenticated && !authLoading" @click="logout()"> | Logout</a>
+    <router-link to="/controlpanel"> {{name}}</router-link>
   </div>
 </template>
 
 <script>
-import { AUTH_LOGOUT } from '@/modules/authAction'
+import { mapGetters, mapState } from "vuex";
+
+import { AUTH_LOGOUT } from "@/modules/authAction";
 export default {
   name: "Navbar",
   data() {
@@ -18,8 +21,15 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/login'))
+      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));
     }
+  },
+  computed: {
+    ...mapGetters(["getProfile", "isAuthenticated", "isProfileLoaded"]),
+    ...mapState({
+      authLoading: state => state.auth.status === "loading",
+      name: state => `${state.user.profile.userName} ${state.user.profile.userSurname}`
+    })
   }
 };
 </script>

@@ -1,9 +1,19 @@
-import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from '@/modules/userAction'
+import {
+  USER_REQUEST,
+  USER_ERROR,
+  USER_SUCCESS
+} from '@/modules/userAction'
 import apiCall from '@/modules/api'
 import Vue from 'vue'
-import { AUTH_LOGOUT } from '@/modules/authAction'
+import {
+  AUTH_LOGOUT
+} from '@/modules/authAction'
+import loginModule from '@/modules/loginModule'
 
-const state = { status: '', profile: {} }
+const state = {
+  status: '',
+  profile: {}
+}
 
 const getters = {
   getProfile: state => state.profile,
@@ -11,10 +21,16 @@ const getters = {
 }
 
 const actions = {
-  [USER_REQUEST]: ({commit, dispatch}) => {
+  [USER_REQUEST]: ({
+    commit,
+    dispatch
+  }) => {
     commit(USER_REQUEST)
-    apiCall({url: 'user/me'})
-      .then(resp => {
+
+    // console.log(localStorage.getItem('user-token'));
+
+    loginModule.getAccountInfo()
+      .then((resp) => {
         commit(USER_SUCCESS, resp)
       })
       .catch(resp => {
@@ -22,6 +38,7 @@ const actions = {
         // if resp is unauthorized, logout, to
         dispatch(AUTH_LOGOUT)
       })
+
   },
 }
 
