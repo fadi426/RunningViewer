@@ -8,13 +8,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    runningData: [],
-    authenticated: false
+    runningData: []
   },
   mutations: {
-    authentication: (state, payload) => {
-      state.authenticated = payload;
-    },
     addRunningData: (state, payload) => {
       state.runningData = payload;
     }

@@ -3,7 +3,6 @@ import {
   USER_ERROR,
   USER_SUCCESS
 } from '@/modules/userAction'
-import apiCall from '@/modules/api'
 import Vue from 'vue'
 import {
   AUTH_LOGOUT

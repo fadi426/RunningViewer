@@ -6,7 +6,7 @@
       | Login</router-link
     >
     <a a v-if="isAuthenticated && !authLoading" @click="logout()"> | Logout</a>
-    <router-link to="/controlpanel"> {{name}}</router-link>
+    <router-link to="/controlpanel"> {{this.fullUserName()}}</router-link>
   </div>
 </template>
 
@@ -22,13 +22,22 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));
+    },
+    fullUserName() {
+      if (
+        this.user.userName == undefined &&
+        this.user.userSurname == undefined
+      ) {
+        return;
+      }
+      return this.user.userName + " " + this.user.userSurname;
     }
   },
   computed: {
     ...mapGetters(["getProfile", "isAuthenticated", "isProfileLoaded"]),
     ...mapState({
       authLoading: state => state.auth.status === "loading",
-      name: state => `${state.user.profile.userName} ${state.user.profile.userSurname}`
+      user: state => state.user.profile
     })
   }
 };

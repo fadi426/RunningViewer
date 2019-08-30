@@ -1,6 +1,5 @@
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '@/modules/authAction.js'
 import { USER_REQUEST } from '@/modules/userAction.js'
-import apiCall from '@/modules/api'
 import axios from 'axios'
 import loginModule from '@/modules/loginModule.js'
 
@@ -15,7 +14,6 @@ const actions = {
   [AUTH_REQUEST]: ({commit, dispatch}, user) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST)
-      // apiCall({url: 'auth', data: user, method: 'POST'})
       loginModule.requestValidation(user)
       .then(resp => {
         console.log(resp)

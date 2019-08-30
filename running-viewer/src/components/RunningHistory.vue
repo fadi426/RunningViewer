@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="limiter">
-      <div class="container-table100">
+      <div class="container-table100 animated zoomIn">
         <div class="wrap-table100">
           <div class="table100">
             <table>
@@ -24,14 +24,6 @@
                   <td class="column5">{{value.Time}}</td>
                   <td class="column6">{{value.AverageSpeed}}</td>
                 </tr>
-                <!-- <tr>
-                  <td class="column1">2017-09-29 01:22</td>
-                  <td class="column2">200398</td>
-                  <td class="column3">iPhone X 64Gb Grey</td>
-                  <td class="column4">$999.00</td>
-                  <td class="column5">1</td>
-                  <td class="column6">$999.00</td>
-                </tr> -->
               </tbody>
             </table>
           </div>
@@ -51,7 +43,7 @@ export default {
   methods: {
     sheetContent() {
       SpreadsheetUtil.getGoogleSheetData().then((result) => {
-        this.$store.commit("addRunningData", result.data);
+        this.$store.commit("addRunningData", result);
       })
     }
   },
@@ -62,301 +54,313 @@ export default {
 };
 </script>
 
-<style>
-/* oswald-regular - latin */
+<style lang="scss">
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
 @font-face {
-  font-family: "Oswald";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/oswald-v24-latin-regular.eot"); /* IE9 Compat Modes */
-  src: local(""),
-    url("../fonts/oswald-v24-latin-regular.eot?#iefix")
-      format("embedded-opentype"),
-    /* IE6-IE8 */ url("../fonts/oswald-v24-latin-regular.woff2") format("woff2"),
-    /* Super Modern Browsers */ url("../fonts/oswald-v24-latin-regular.woff")
-      format("woff"),
-    /* Modern Browsers */ url("../fonts/oswald-v24-latin-regular.ttf")
-      format("truetype"),
-    /* Safari, Android, iOS */
-      url("../fonts/oswald-v24-latin-regular.svg#Oswald") format("svg"); /* Legacy iOS */
+	font-family: "Oswald";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/oswald-v24-latin-regular.eot");
+	src: local(""), url("../fonts/oswald-v24-latin-regular.eot?#iefix") format("embedded-opentype"),  url("../fonts/oswald-v24-latin-regular.woff2") format("woff2"),  url("../fonts/oswald-v24-latin-regular.woff") format("woff"),  url("../fonts/oswald-v24-latin-regular.ttf") format("truetype"),  url("../fonts/oswald-v24-latin-regular.svg#Oswald") format("svg");
 }
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-
 div {
-  height: 100%;
-  font-family: oswald;
+	height: 100%;
+	font-family: oswald;
 }
-
 a {
-  margin: 0;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
+	margin: 0;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	&:focus {
+		outline: none !important;
+	}
+	&:hover {
+		text-decoration: none;
+	}
 }
-
-a:focus {
-  outline: none !important;
+h1 {
+	margin: 0;
 }
-
-a:hover {
-  text-decoration: none;
+h2 {
+	margin: 0;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
+h3 {
+	margin: 0;
+}
+h4 {
+	margin: 0;
+}
+h5 {
+	margin: 0;
+}
 h6 {
-  margin: 0;
+	margin: 0;
 }
-
 p {
-  margin: 0;
+	margin: 0;
 }
-
-ul,
+ul {
+	margin: 0;
+	list-style-type: none;
+}
 li {
-  margin: 0;
-  list-style-type: none;
+	margin: 0;
+	list-style-type: none;
 }
-
 input {
-  display: block;
-  outline: none;
-  border: none !important;
+	display: block;
+	outline: none;
+	border: none !important;
+	&:focus {
+		border-color: transparent !important;
+	}
 }
-
 textarea {
-  display: block;
-  outline: none;
+	display: block;
+	outline: none;
+	&:focus {
+		border-color: transparent !important;
+	}
 }
-
-textarea:focus,
-input:focus {
-  border-color: transparent !important;
-}
-
 button {
-  outline: none !important;
-  border: none;
-  background: 0 0;
+	outline: none !important;
+	border: none;
+	background: 0 0;
+	&:hover {
+		cursor: pointer;
+	}
 }
-
-button:hover {
-  cursor: pointer;
-}
-
 iframe {
-  border: none !important;
+	border: none !important;
 }
-
 .limiter {
-  width: 100%;
-  margin: 0 auto;
+	width: 100%;
+	margin: 0 auto;
 }
-
 .container-table100 {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 33px 30px;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	padding: 33px 30px;
 }
-
 .wrap-table100 {
-  width: 1170px;
+	width: 1170px;
 }
-
 table {
-  border-spacing: 1;
-  border-collapse: collapse;
-  background: #fff;
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
+	border-spacing: 1;
+	border-collapse: collapse;
+	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+	* {
+		position: relative;
+	}
+	td {
+		padding-left: 8px;
+		text-align: left;
+	}
+	th {
+		padding-left: 8px;
+		text-align: left;
+	}
+	thead {
+		tr {
+			height: 60px;
+			background: #673ab7;
+		}
+	}
+	tbody {
+		tr {
+			height: 50px;
+			&:last-child {
+				border: 0;
+			}
+		}
+	}
+	td.l {
+		text-align: right;
+	}
+	th.l {
+		text-align: right;
+	}
+	td.c {
+		text-align: center;
+	}
+	th.c {
+		text-align: center;
+	}
+	td.r {
+		text-align: center;
+	}
+	th.r {
+		text-align: center;
+	}
 }
-
-table * {
-  position: relative;
+.table100-head {
+	th {
+		font-family: oswald;
+		font-size: 18px;
+		color: #fff;
+		line-height: 1.2;
+		font-weight: unset;
+	}
 }
-
-table td,
-table th {
-  padding-left: 8px;
+tbody {
+	tr {
+		&:nth-child(even) {
+			background-color: #f5f5f5;
+		}
+		font-family: oswald;
+		font-size: 15px;
+		color: gray;
+		line-height: 1.2;
+		font-weight: unset;
+		&:hover {
+			color: #999;
+			background-color: #f5f5f5;
+			cursor: pointer;
+		}
+	}
 }
-
-table thead tr {
-  height: 60px;
-  background: #673ab7;
-}
-
-table tbody tr {
-  height: 50px;
-}
-
-table tbody tr:last-child {
-  border: 0;
-}
-
-table td,
-table th {
-  text-align: left;
-}
-
-table td.l,
-table th.l {
-  text-align: right;
-}
-
-table td.c,
-table th.c {
-  text-align: center;
-}
-
-table td.r,
-table th.r {
-  text-align: center;
-}
-
-.table100-head th {
-  font-family: oswald;
-  font-size: 18px;
-  color: #fff;
-  line-height: 1.2;
-  font-weight: unset;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f5f5f5;
-}
-
-tbody tr {
-  font-family: oswald;
-  font-size: 15px;
-  color: gray;
-  line-height: 1.2;
-  font-weight: unset;
-}
-
-tbody tr:hover {
-  color: #555;
-  background-color: #f5f5f5;
-  cursor: pointer;
-}
-
 .column1 {
-  width: 260px;
-  padding-left: 40px;
+	width: 260px;
+	padding-left: 40px;
 }
-
 .column2 {
-  width: 160px;
+	width: 160px;
 }
-
 .column3 {
-  width: 245px;
+	width: 245px;
 }
-
 .column4 {
-  width: 110px;
-  text-align: right;
+	width: 110px;
+	text-align: right;
 }
-
 .column5 {
-  width: 170px;
-  text-align: right;
+	width: 170px;
+	text-align: right;
 }
-
 .column6 {
-  width: 222px;
-  text-align: right;
-  padding-right: 62px;
+	width: 222px;
+	text-align: right;
+	padding-right: 62px;
 }
-
 @media screen and (max-width: 992px) {
-  table {
-    display: block;
-  }
-  table > *,
-  table tr,
-  table td,
-  table th {
-    display: block;
-  }
-  table thead {
-    display: none;
-  }
-  table tbody tr {
-    height: auto;
-    padding: 37px 0;
-  }
-  table tbody tr td {
-    padding-left: 60% !important;
-    margin-bottom: 24px;
-  }
-  table tbody tr td:last-child {
-    margin-bottom: 0;
-  }
-  table tbody tr td:before {
-    font-family: oswald;
-    font-size: 14px;
-    color: #999;
-    line-height: 1.2;
-    font-weight: unset;
-    position: absolute;
-    width: 40%;
-    left: 30px;
-    top: 0;
-  }
-  table tbody tr td:nth-child(1):before {
-    content: "Date";
-  }
-  table tbody tr td:nth-child(2):before {
-    content: "Start";
-  }
-  table tbody tr td:nth-child(3):before {
-    content: "End";
-  }
-  table tbody tr td:nth-child(4):before {
-    content: "Distance (km)";
-  }
-  table tbody tr td:nth-child(5):before {
-    content: "Time (hours)";
-  }
-  table tbody tr td:nth-child(6):before {
-    content: "Average speed (km/h)";
-  }
-  .column4,
-  .column5,
-  .column6 {
-    text-align: left;
-  }
-  .column4,
-  .column5,
-  .column6,
-  .column1,
-  .column2,
-  .column3 {
-    width: 100%;
-  }
-  tbody tr {
-    font-size: 14px;
-  }
+	table {
+		display: block;
+		>* {
+			display: block;
+		}
+		tr {
+			display: block;
+		}
+		td {
+			display: block;
+		}
+		th {
+			display: block;
+		}
+		thead {
+			display: none;
+		}
+		tbody {
+			tr {
+				height: auto;
+				padding: 37px 0;
+				td {
+					padding-left: 60% !important;
+					margin-bottom: 24px;
+					&:last-child {
+						margin-bottom: 0;
+					}
+					&:before {
+						font-family: oswald;
+						font-size: 14px;
+						color: #999;
+						line-height: 1.2;
+						font-weight: unset;
+						position: absolute;
+						width: 40%;
+						left: 30px;
+						top: 0;
+					}
+					&:nth-child(1) {
+						&:before {
+							content: "Date";
+						}
+					}
+					&:nth-child(2) {
+						&:before {
+							content: "Start";
+						}
+					}
+					&:nth-child(3) {
+						&:before {
+							content: "End";
+						}
+					}
+					&:nth-child(4) {
+						&:before {
+							content: "Distance (km)";
+						}
+					}
+					&:nth-child(5) {
+						&:before {
+							content: "Time (hours)";
+						}
+					}
+					&:nth-child(6) {
+						&:before {
+							content: "Average speed (km/h)";
+						}
+					}
+				}
+			}
+		}
+	}
+	.column4 {
+		text-align: left;
+		width: 100%;
+	}
+	.column5 {
+		text-align: left;
+		width: 100%;
+	}
+	.column6 {
+		text-align: left;
+		width: 100%;
+	}
+	.column1 {
+		width: 100%;
+	}
+	.column2 {
+		width: 100%;
+	}
+	.column3 {
+		width: 100%;
+	}
+	tbody {
+		tr {
+			font-size: 14px;
+		}
+	}
+}
+@media (max-width: 576px) {
+	.container-table100 {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
-@media (max-width: 576px) {
-  .container-table100 {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
 </style>

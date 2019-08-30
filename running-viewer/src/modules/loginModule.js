@@ -26,11 +26,9 @@ export default class loginModule {
                         }
                     })
                 .then(function (response) {
-                    console.log(response);
                     resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     reject(error);
                 });
         })
@@ -41,11 +39,9 @@ export default class loginModule {
             let token = localStorage.getItem('user-token');
             axios.get('https://localhost:5001/api/authentication/' + token)
                 .then(function (response) {
-                    console.log(response);
                     resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     reject(error);
                 });
         })
