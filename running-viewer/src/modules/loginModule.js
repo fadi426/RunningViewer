@@ -4,7 +4,7 @@ import {
 } from 'q';
 export default class loginModule {
     static requestValidation(user) {
-        return new Promise((resolve, error) => {
+        return new Promise((resolve, reject) => {
 
             function hashCode(s) {
                 let h;
@@ -25,17 +25,17 @@ export default class loginModule {
                             'Content-Type': 'application/json',
                         }
                     })
-                .then(function (response) {
+                .then((response) => {
                     resolve(response.data);
                 })
-                .catch(function (error) {
+                .catch((error) => {
                     reject(error);
                 });
         })
     }
 
     static getAccountInfo() {
-        return new Promise((resolve, error) => {
+        return new Promise((resolve, reject) => {
             let token = localStorage.getItem('user-token');
             axios.get('https://localhost:5001/api/authentication/' + token)
                 .then(function (response) {

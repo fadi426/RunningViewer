@@ -34,8 +34,6 @@ export default {
     login() {
       if (this.username != "" && this.password != "") {
         const { user } = this;
-        // let token = loginModule.requestValidation(user);
-        // if (loginModule.requestValidation(user)) {
           this.$store
             .dispatch(AUTH_REQUEST, user)
             .then(() => {
@@ -43,13 +41,13 @@ export default {
             })
             .catch(() => {
               this.incorrectPass = true;
-            });
+            })
+            .finally(() => {
+              this.incorrectPass = true;
+            })
         } else {
           this.incorrectPass = true;
         }
-      // } else {
-      //   this.incorrectPass = true;
-      // }
     },
     resetValidation() {
       this.incorrectPass = false;

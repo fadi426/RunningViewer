@@ -4,13 +4,14 @@
         <!-- You can toggle select (disabled) -->
         <label>
             <input type="checkbox" name="placeholder">
+            <i class="toggle icon icon-arrow-down"></i>
+            <i class="toggle icon icon-arrow-up"></i>
             <span class="placeholder">Choose your destination</span>
 
             <label class="option" v-for="destination in destinationList" v-bind:key="destination" v-on:click="setSelectedValue">
                 <input type="radio" name="option">
                 <span class="title animated fadeIn">{{destination}}</span>
             </label>
-
         </label>
         </div>
     </div>
@@ -21,19 +22,20 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      selectedValue: "",
       destinationList: []
     };
   },
   methods: {
     setSelectedValue() {
       document.getElementsByName("option").forEach(element => {
-        if (element.checked)
-          this.selectedValue = element.parentElement.getElementsByTagName(
+        if (element.checked) {
+          let selectedValue = element.parentElement.getElementsByTagName(
             "span"
           )[0].textContent;
+          this.$store.commit("setSelectedDestination", selectedValue);
+        }
       });
-      console.log(this.selectedValue);
+      console.log(this.$store.state.selectedDestination);
     },
     createDestinationList() {
       this.runningData.forEach(dataElement => {
@@ -46,15 +48,18 @@ export default {
   computed: mapState(["runningData"]),
   watch: {
     runningData() {
-      console.log("fd");
       this.createDestinationList();
     }
+  },
+  created() {
+    this.createDestinationList();
   }
 };
 </script>
 
 <style lang="scss">
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
+@import 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.min.css';
 .menuContainer {
   position: absolute;
   top: 15%;
@@ -66,13 +71,13 @@ export default {
   color: #fff;
   line-height: 1.2;
   font-weight: unset;
+  height: 20%;
 
   @media (max-width: 576px) {
     top: 1%;
     padding-left: 15px;
     padding-right: 15px;
     width: 100%;
-    // padding: 33px 30px;
     margin-left: -50%;
   }
 
@@ -102,7 +107,7 @@ export default {
       z-index: 4;
       right: 1.5em;
       top: 1.6em;
-      color: #ccc;
+      color: #fff;
     }
     .title,
     .placeholder {
@@ -111,7 +116,7 @@ export default {
       width: 100%;
       height: 60px;
       padding: 1.5em 2em;
-      background: rgba(255, 255, 255, 1);
+      background: rgb(248, 248, 255, 1);
       cursor: pointer;
     }
     & > label > input {
@@ -120,24 +125,23 @@ export default {
       top: 0px;
       z-index: 2;
       width: 100%;
-      height: 100%;
       display: block;
       opacity: 0;
       cursor: pointer;
       &:checked {
         z-index: 2;
-        ~ i.toggle.icon-plus {
+        ~ i.toggle.icon-arrow-down {
           display: none;
         }
-        ~ i.toggle.icon-minus {
+        ~ i.toggle.icon-arrow-up {
           display: block;
         }
       }
       &:not(:checked) {
-        ~ i.toggle.icon-minus {
+        ~ i.toggle.icon-arrow-up {
           display: none;
         }
-        ~ i.toggle.icon-plus {
+        ~ i.toggle.icon-arrow-down {
           display: block;
         }
         ~ label.option input:not(:checked) ~ .title {
@@ -168,6 +172,10 @@ export default {
         z-index: 2;
         transition: background 0.3s ease-out;
         color: grey;
+        i.icon {
+          padding-right: 8px;
+          color: rgba(146, 168, 209, 1);
+        }
         &:hover {
           color: #fff;
           background: rgba(155, 155, 155, 0.8);

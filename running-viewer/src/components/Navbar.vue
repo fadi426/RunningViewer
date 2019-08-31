@@ -2,7 +2,7 @@
   <div id="nav">
     <router-link to="/">Home</router-link>
     <router-link to="/about"> | About</router-link>
-    <router-link v-if="!isAuthenticated && !authLoading" to="/login">
+    <router-link v-if="!isAuthenticated" to="/login">
       | Login</router-link
     >
     <a a v-if="isAuthenticated && !authLoading" @click="logout()"> | Logout</a>

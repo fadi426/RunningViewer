@@ -13,19 +13,19 @@ const getters = {
 const actions = {
   [AUTH_REQUEST]: ({commit, dispatch}, user) => {
     return new Promise((resolve, reject) => {
-      commit(AUTH_REQUEST)
+      commit(AUTH_REQUEST);
       loginModule.requestValidation(user)
       .then(resp => {
-        console.log(resp)
         localStorage.setItem('user-token', resp.token)
         // Here set the header of your ajax library to the token value.
         // example with axios
         axios.defaults.headers.common['Authorization'] = resp.token
         commit(AUTH_SUCCESS, resp)
         dispatch(USER_REQUEST)
+        console.log(resp)
         resolve(resp)
       })
-      .catch(err => {
+      .catch((err) =>{
         commit(AUTH_ERROR, err)
         localStorage.removeItem('user-token')
         reject(err)

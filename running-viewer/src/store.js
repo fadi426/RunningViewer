@@ -8,11 +8,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    runningData: []
+    runningData: [],
+    selectedDestination: ""
   },
   mutations: {
     addRunningData: (state, payload) => {
       state.runningData = payload;
+    },
+    setSelectedDestination: ( state, payload) => {
+      state.selectedDestination = payload;
     }
   },
   actions: {},

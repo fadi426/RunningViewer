@@ -31,6 +31,7 @@
 
 <script>
 import SpreadsheetUtil from "@/modules/SpreadsheetUtil.js";
+import tableUtil from "@/modules/tableUtil.js";
 export default {
   data() {
     return {
@@ -72,19 +73,9 @@ export default {
       return false;
     },
     timeToDecimal() {
-      let time = this.input.Time;
-      let decimal = time
-        .split(":")
-        .map(function(val) {
-          return parseInt(val, 10);
-        })
-        .reduce(function(previousValue, currentValue, index, array) {
-          return previousValue + currentValue / Math.pow(60, index);
-        });
-      let speed = this.input.Distance.replace(",",".") / decimal;
-      if (!Number.isNaN(speed)) {
-        this.input.AverageSpeed = speed;
-      }
+      let formattedTime = tableUtil.timeToDecimal(this.input.Time); 
+      let speed = this.input.Distance.replace(",", ".") / formattedTime;
+      this.input.AverageSpeed = speed;
     }
   },
   computed: {
