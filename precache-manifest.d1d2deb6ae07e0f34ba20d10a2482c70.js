@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/fonts/oswald-v24-latin-regular.d54dcd9a.woff2"
   },
   {
-    "revision": "6a6a28323d1838e1f4cf5bf856c74c85",
+    "revision": "912a63ebeadb4e50a36a4e795a9943c3",
     "url": "/index.html"
   },
   {
