@@ -1,25 +1,30 @@
 <template>
     <div class="zoom">
-  <a class="actionButton mainButton" id="zoomBtn" v-on:click="toggleMenu">Open</a>
+  <a class="actionButton mainButton" id="zoomBtn" v-on:click="toggleMenu">
+    <img class="mainButtonIcon" v-bind:src="require('@/assets/filter-and-sort-arrows.svg')" />
+  </a>
   <ul class="zoom-menu">
-    <li><a class="actionButton subButton Date scale-transition scale-out">
+    <li><a class="actionButton subButton Date scale-transition scale-out" v-on:click="selectSubButton($event, 'Date')">
         <img v-bind:src="require('@/assets/_ionicons_svg_md-calendar.svg')" />
         </a>
     </li>
-    <li><a class="actionButton subButton start scale-transition scale-out">
+    <li><a class="actionButton subButton start scale-transition scale-out" v-on:click="selectSubButton($event, 'Start')">
         <img v-bind:src="require('@/assets/_ionicons_svg_md-pin.svg')" />
         </a>
     </li>
-    <li><a class="actionButton subButton end scale-transition scale-out">
+    <li><a class="actionButton subButton end scale-transition scale-out" v-on:click="selectSubButton($event, 'End')">
         <img v-bind:src="require('@/assets/_ionicons_svg_md-flag.svg')" />
         </a>
     </li>
-    <li><a class="actionButton subButton distance scale-transition scale-out">Action</a></li>
-    <li><a class="actionButton subButton time scale-transition scale-out">
+    <li><a class="actionButton subButton distance scale-transition scale-out" v-on:click="selectSubButton($event, 'Distance')">
+      <img v-bind:src="require('@/assets/distance.svg')" />
+      </a>
+    </li>
+    <li><a class="actionButton subButton time scale-transition scale-out" v-on:click="selectSubButton($event, 'Time')">
         <img v-bind:src="require('@/assets/_ionicons_svg_md-stopwatch.svg')" />
         </a>
     </li>
-    <li><a class="actionButton subButton speed scale-transition scale-out">
+    <li><a class="actionButton subButton speed scale-transition scale-out" v-on:click="selectSubButton($event, 'Speed')">
         <img v-bind:src="require('@/assets/_ionicons_svg_md-speedometer.svg')" />
         </a>
     </li>
@@ -38,16 +43,27 @@ export default {
       for (let button of buttonList) {
         button.classList.toggle("scale-out");
       }
+    },
+    selectSubButton(event, mode) {
+      let buttonList = document.getElementsByClassName("subButton");
+      for (let button of buttonList) {
+        button.style.opacity = 1;
+      }
+      let selectedButton = (event.target.parentElement.style.opacity = 0.6);
+      this.$parent.sortTable(mode);
     }
   }
 };
 </script>
 
 <style lang="scss">
+svg {
+  fill: #fff;
+}
 .zoom {
   position: fixed;
-  bottom: 45px;
-  right: 24px;
+  bottom: 0px;
+  right: 19px;
   height: 70px;
 }
 img {
@@ -70,7 +86,7 @@ img {
   cursor: pointer;
   color: #fff;
   &:hover {
-    background-color: #4db6ac;
+    opacity: 0.6;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
       0 3px 1px -1px rgba(0, 0, 0, 0.2);
   }
@@ -85,6 +101,10 @@ img {
   width: 60px;
   height: 60px;
   line-height: 60px;
+  background-color: #673ab7;
+}
+.mainButtonIcon {
+  padding-top: 10px;
 }
 .zoom-menu {
   position: absolute;
@@ -105,33 +125,21 @@ img {
 }
 .Date {
   background-color: #f44336;
-  &:hover {
-    background-color: #e57373;
-  }
 }
 .start {
   background-color: #ffeb3b;
-  &:hover {
-    background-color: #fff176;
-  }
 }
 .end {
   background-color: #4caf50;
-  &:hover {
-    background-color: #81c784;
-  }
 }
 .distance {
   background-color: #2196f3;
-  &:hover {
-    background-color: #64b5f6;
-  }
 }
 .time {
   background-color: #9c27b0;
-  &:hover {
-    background-color: #ba68c8;
-  }
+}
+.speed {
+  background-color: #fe840e;
 }
 
 .scale-transition {

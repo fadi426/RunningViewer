@@ -26,8 +26,6 @@ const actions = {
   }) => {
     commit(USER_REQUEST)
 
-    // console.log(localStorage.getItem('user-token'));
-
     loginModule.getAccountInfo()
       .then((resp) => {
         commit(USER_SUCCESS, resp)

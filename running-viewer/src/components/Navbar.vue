@@ -1,12 +1,10 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about"> | About</router-link>
-    <router-link v-if="!isAuthenticated" to="/login">
-      | Login</router-link
-    >
-    <a a v-if="isAuthenticated && !authLoading" @click="logout()"> | Logout</a>
-    <router-link to="/controlpanel"> {{this.fullUserName()}}</router-link>
+  <div class="nav">
+    <router-link class="menuOption" to="/">Home</router-link>
+    <router-link class="menuOption" to="/about">About</router-link>
+    <router-link class="menuOption" v-if="!isAuthenticated" to="/login">Login</router-link>
+    <router-link class="menuOption" to="/controlpanel"> {{this.fullUserName()}}</router-link>
+    <a class="menuOption" v-if="isAuthenticated && !authLoading" @click="logout()">Logout</a>
   </div>
 </template>
 
@@ -44,19 +42,27 @@ export default {
 </script>
 
 <style lang="scss">
-#nav {
+.nav {
   padding: 30px;
   a {
     font-weight: bold;
-    color: #673ab7;
+    color: #fff;
     text-decoration: underline;
     &.router-link-exact-active {
-      color: #42b983;
+      color: #673ab7;
     }
   }
   a:hover {
     cursor: pointer;
     text-decoration: none;
+  }
+  .menuOption {
+    padding: 5px;
+    font-size: x-large;
+
+    @media (max-width: 576px) {
+      font-size: large;
+    }
   }
 }
 </style>

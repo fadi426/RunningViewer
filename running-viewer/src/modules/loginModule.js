@@ -19,7 +19,7 @@ export default class loginModule {
                 authenticationToken: hash
             }
 
-            axios.post('https://localhost:5001/api/authentication',
+            axios.post('https://personal-authentication-api.azurewebsites.net/api/authentication',
                     jsonData, {
                         headers: {
                             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export default class loginModule {
     static getAccountInfo() {
         return new Promise((resolve, reject) => {
             let token = localStorage.getItem('user-token');
-            axios.get('https://localhost:5001/api/authentication/' + token)
+            axios.get('https://personal-authentication-api.azurewebsites.net/api/authentication/' + token)
                 .then(function (response) {
                     resolve(response.data);
                 })

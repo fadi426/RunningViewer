@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="limiter">
-      <div class="container-table100 animated zoomIn">
+      <div class="container-table100 animated fadeIn">
         <div class="wrap-table100">
           <div class="table100">
             <table>
@@ -16,13 +16,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="value in dataList" v-bind:key="value.Date">
-                  <td class="column1">{{value.Date}}</td>
-                  <td class="column2">{{value.Start}}</td>
-                  <td class="column3">{{value.End}}</td>
-                  <td class="column4">{{value.Distance}}</td>
-                  <td class="column5">{{value.Time}}</td>
-                  <td class="column6">{{value.AverageSpeed}}</td>
+                <tr v-for="value in dataList" v-bind:key="value.date">
+                  <td class="column1">{{value.date}}</td>
+                  <td class="column2">{{value.start}}</td>
+                  <td class="column3">{{value.end}}</td>
+                  <td class="column4">{{value.distance}}</td>
+                  <td class="column5">{{value.time}}</td>
+                  <td class="column6">{{value.averageSpeed}}</td>
                 </tr>
               </tbody>
             </table>
@@ -55,27 +55,27 @@ export default {
     filterDataList() {
       function checkDestination(selectedValue) {
         return function(value) {
-          if (value.End == selectedValue) return value;
+          if (value.end == selectedValue) return value;
         };
       }
       this.dataList = this.$store.state.runningData.filter(
         checkDestination(this.selectedDestination)
       );
-      console.log("nop");
-	},
-	sortTable(mode) {
-		if(mode == "Date") this.dataList = tableUtil.sortByDate(this.dataList);
-		
-		if(mode == "Start") this.dataList = tableUtil.sortByStart(this.dataList);
+    },
+    sortTable(mode) {
+      if (mode == "Date") this.dataList = tableUtil.sortByDate(this.dataList);
 
-		if(mode == "End") this.dataList = tableUtil.sortByEnd(this.dataList);
+      if (mode == "Start") this.dataList = tableUtil.sortByStart(this.dataList);
 
-		if(mode == "Distance") this.dataList = tableUtil.sortByDistance(this.dataList);
+      if (mode == "End") this.dataList = tableUtil.sortByEnd(this.dataList);
 
-		if(mode == "Time") this.dataList = tableUtil.sortByTime(this.dataList);
+      if (mode == "Distance")
+        this.dataList = tableUtil.sortByDistance(this.dataList);
 
-		if(mode == "Speed") this.dataList = tableUtil.sortBySpeed(this.dataList);
-	}
+      if (mode == "Time") this.dataList = tableUtil.sortByTime(this.dataList);
+
+      if (mode == "Speed") this.dataList = tableUtil.sortBySpeed(this.dataList);
+    },
   },
   computed: mapState(["selectedDestination"]),
   watch: {
@@ -84,11 +84,11 @@ export default {
     }
   },
   created() {
-	if (this.$store.state.runningData.length == 0) this.sheetContent();
-	else this.dataList = this.$store.state.runningData;
+    if (this.$store.state.runningData.length == 0) this.sheetContent();
+    else this.dataList = this.$store.state.runningData;
   },
   components: {
-	  ActionButton
+    ActionButton
   }
 };
 </script>
@@ -259,10 +259,10 @@ table {
     color: #fff;
     line-height: 1.2;
     font-weight: unset;
-	cursor: pointer;
-	&:hover {
-		opacity: 0.5;
-	}
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
   }
 }
 tbody {
@@ -306,6 +306,9 @@ tbody {
   padding-right: 62px;
 }
 @media screen and (max-width: 992px) {
+  .container-table100{ 
+    align-items: normal;
+  }
   table {
     display: block;
     > * {
@@ -409,7 +412,7 @@ tbody {
   .container-table100 {
     padding-left: 15px;
     padding-right: 15px;
-	align-items: normal;
+    align-items: normal;
   }
 }
 </style>

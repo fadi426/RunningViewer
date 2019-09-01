@@ -1,17 +1,18 @@
 <template>
     <div class="menuContainer">
-            <div class="select animated zoomIn">
+            <div class="select animated fadeIn">
         <!-- You can toggle select (disabled) -->
         <label>
-            <input type="checkbox" name="placeholder">
+            <input type="checkbox" name="placeholder" v-on:click="checkForToggle()">
             <i class="toggle icon icon-arrow-down"></i>
             <i class="toggle icon icon-arrow-up"></i>
             <span class="placeholder">Choose your destination</span>
-
-            <label class="option" v-for="destination in destinationList" v-bind:key="destination" v-on:click="setSelectedValue">
-                <input type="radio" name="option">
-                <span class="title animated fadeIn">{{destination}}</span>
-            </label>
+            <div class="scrollableDiv">
+              <label class="option" v-for="destination in destinationList" v-bind:key="destination" v-on:click="setSelectedValue">
+                  <input type="radio" name="option" v-on:click="checkForToggle()">
+                  <span class="title animated fadeIn">{{destination}}</span>
+              </label>
+            </div>
         </label>
         </div>
     </div>
@@ -35,14 +36,21 @@ export default {
           this.$store.commit("setSelectedDestination", selectedValue);
         }
       });
-      console.log(this.$store.state.selectedDestination);
+      document.getElementsByName('placeholder')[0].checked = false;
+      this.checkForToggle();
     },
     createDestinationList() {
       this.runningData.forEach(dataElement => {
-        if (!this.destinationList.includes(dataElement.End)) {
-          this.destinationList.push(dataElement.End);
+        if (!this.destinationList.includes(dataElement.end)) {
+          this.destinationList.push(dataElement.end);
         }
       });
+    },
+    checkForToggle() {
+      let isToggled = document.getElementsByName("placeholder")[0].checked;
+      let menuContainer = document.getElementsByClassName("menuContainer")[0];
+      if (!isToggled) menuContainer.style.height = "60px";
+      else menuContainer.style.height = "35vh";
     }
   },
   computed: mapState(["runningData"]),
@@ -59,7 +67,7 @@ export default {
 
 <style lang="scss">
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
-@import 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.min.css';
+@import "https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.min.css";
 .menuContainer {
   position: absolute;
   top: 15%;
@@ -71,7 +79,7 @@ export default {
   color: #fff;
   line-height: 1.2;
   font-weight: unset;
-  height: 20%;
+  height: 60px;
 
   @media (max-width: 576px) {
     top: 1%;
@@ -82,13 +90,12 @@ export default {
   }
 
   @media screen and (max-width: 992px) {
-    .menuContainer {
-      width: 40%;
-      left: 30px;
-      top: 0;
-    }
+      top: 1%;
   }
-
+  .scrollableDiv {
+    overflow-y: auto;
+    height: 70%;
+  }
   .select {
     position: relative;
     overflow: hidden;
@@ -146,6 +153,9 @@ export default {
         }
         ~ label.option input:not(:checked) ~ .title {
           display: none !important;
+        }
+        ~ .select {
+          height: 200px;
         }
       }
       &:disabled {

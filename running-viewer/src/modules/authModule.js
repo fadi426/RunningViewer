@@ -22,7 +22,6 @@ const actions = {
         axios.defaults.headers.common['Authorization'] = resp.token
         commit(AUTH_SUCCESS, resp)
         dispatch(USER_REQUEST)
-        console.log(resp)
         resolve(resp)
       })
       .catch((err) =>{
