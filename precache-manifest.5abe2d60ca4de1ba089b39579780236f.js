@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "dc872e68995b6f6a0a24f013ff750c50",
-    "url": "/img/oswald-v24-latin-regular.dc872e68.svg"
+    "revision": "2d669f955b2888adc4f0203119bc2126",
+    "url": "/img/oswald-v24-latin-regular.2d669f95.svg"
   },
   {
-    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+    "revision": "735ab4f94fbcd57074377afca324c813",
     "url": "/robots.txt"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/img/_ionicons_svg_md-speedometer.a6dc68ca.svg"
   },
   {
-    "revision": "bc35fc0fdbe0690754fe",
-    "url": "/js/app.bb43d9ee.js"
+    "revision": "363d5dd1046294866ddd",
+    "url": "/js/app.db6f23c1.js"
   },
   {
     "revision": "0ded48e9c3d1fb75850d",
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/img/_ionicons_svg_md-calendar.947c6330.svg"
   },
   {
-    "revision": "e052a0fa0a239c17d769",
-    "url": "/js/about.f5db692f.js"
+    "revision": "defdb55578cdedca62d7",
+    "url": "/js/about.6ece16ac.js"
   },
   {
     "revision": "b5f5f4169c3e6eb4fd2823e0f34e8790",
@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/fonts/oswald-v24-latin-regular.d54dcd9a.woff2"
   },
   {
-    "revision": "dfa289307fb1abf1d06fae5dfde313fb",
+    "revision": "6a6a28323d1838e1f4cf5bf856c74c85",
     "url": "/index.html"
   },
   {
@@ -72,7 +72,7 @@ self.__precacheManifest = [
     "url": "/fonts/oswald-v24-latin-regular.3654d75c.woff"
   },
   {
-    "revision": "bc35fc0fdbe0690754fe",
-    "url": "/css/app.0f0118be.css"
+    "revision": "363d5dd1046294866ddd",
+    "url": "/css/app.dda9d1b7.css"
   }
 ];
