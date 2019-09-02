@@ -1,19 +1,19 @@
 <template>
     <div class="zoom">
   <a class="actionButton mainButton" id="zoomBtn" v-on:click="toggleMenu">
-    <img class="mainButtonIcon" v-bind:src="require('@/assets/filter-and-sort-arrows.svg')" />
+    <img class="mainButtonIcon" v-bind:src="require('@/assets/filter.svg')" />
   </a>
   <ul class="zoom-menu">
     <li><a class="actionButton subButton Date scale-transition scale-out" v-on:click="selectSubButton($event, 'Date')">
-        <img v-bind:src="require('@/assets/_ionicons_svg_md-calendar.svg')" />
+        <img v-bind:src="require('@/assets/calendar.svg')" />
         </a>
     </li>
     <li><a class="actionButton subButton start scale-transition scale-out" v-on:click="selectSubButton($event, 'Start')">
-        <img v-bind:src="require('@/assets/_ionicons_svg_md-pin.svg')" />
+        <img v-bind:src="require('@/assets/pin.svg')" />
         </a>
     </li>
     <li><a class="actionButton subButton end scale-transition scale-out" v-on:click="selectSubButton($event, 'End')">
-        <img v-bind:src="require('@/assets/_ionicons_svg_md-flag.svg')" />
+        <img v-bind:src="require('@/assets/flag.svg')" />
         </a>
     </li>
     <li><a class="actionButton subButton distance scale-transition scale-out" v-on:click="selectSubButton($event, 'Distance')">
@@ -21,11 +21,11 @@
       </a>
     </li>
     <li><a class="actionButton subButton time scale-transition scale-out" v-on:click="selectSubButton($event, 'Time')">
-        <img v-bind:src="require('@/assets/_ionicons_svg_md-stopwatch.svg')" />
+        <img v-bind:src="require('@/assets/stopwatch.svg')" />
         </a>
     </li>
     <li><a class="actionButton subButton speed scale-transition scale-out" v-on:click="selectSubButton($event, 'Speed')">
-        <img v-bind:src="require('@/assets/_ionicons_svg_md-speedometer.svg')" />
+        <img v-bind:src="require('@/assets/speedometer.svg')" />
         </a>
     </li>
   </ul>
