@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.ea09c267f63f3cfecd9c8cfc9872b400.js"
+  "/RunningViewer/precache-manifest.0cf06b7f9c2cb57054d3512ca38d58bb.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "running-viewer"});
